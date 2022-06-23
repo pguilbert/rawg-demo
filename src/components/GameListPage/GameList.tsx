@@ -1,6 +1,8 @@
-import { Box, Grid, GridItem, Image } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Link } from "@chakra-ui/react";
+import React from "react";
 import { GameListResponse } from "../../types/GameListResponse";
 import { Card } from "../Card/Card";
+import { StretchedLink } from "../Links/StretchedLink";
 
 type GameListProps = {
   items: GameListResponse[];
@@ -42,7 +44,7 @@ const GameCard = ({ item }: { item: GameListResponse }) => {
       )}
       <Card.Details>
         <Box fontSize="xl" fontWeight="semibold" as="h4">
-          {item.name}
+          <StretchedLink to={`/games/${item.id}`}>{item.name}</StretchedLink>
         </Box>
       </Card.Details>
     </Card>

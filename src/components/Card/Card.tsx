@@ -9,6 +9,7 @@ export const Card = (props: React.ComponentProps<typeof Flex>) => (
     rounded="lg"
     shadow="md"
     borderWidth="1px"
+    position="relative"
     {...props}
   />
 );

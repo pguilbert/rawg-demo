@@ -40,13 +40,15 @@ export const GameListPage = () => {
     <div>
       {itemsToShow && <GameList items={itemsToShow} />}
 
-      <SimplePagination
-        hasNext={Boolean(data?.next)}
-        goToNext={goToNextPage}
-        hasPrevious={Boolean(data?.previous)}
-        goToPrevious={goToPreviousPage}
-        currentPage={currentPage}
-      />
+      {data?.results && (
+        <SimplePagination
+          hasNext={Boolean(data?.next)}
+          goToNext={goToNextPage}
+          hasPrevious={Boolean(data?.previous)}
+          goToPrevious={goToPreviousPage}
+          currentPage={currentPage}
+        />
+      )}
 
       {isLoading && <LoadingOverlay />}
     </div>
