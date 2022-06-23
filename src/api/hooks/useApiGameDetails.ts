@@ -15,5 +15,5 @@ export const useApiGameDetails = (id?: string) => {
     fetcher
   );
 
-  return { ...swr, isLoading: !swr.data && !swr.error };
+  return { ...swr, isLoading: id && !swr.data && !swr.error };
 };

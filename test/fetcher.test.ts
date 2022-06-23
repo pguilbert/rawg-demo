@@ -1,17 +1,14 @@
+import "whatwg-fetch";
 import { ApiConfigs } from "../src/api/api";
 import { fetcher } from "../src/api/fetcher";
 
-global.fetch = <any>jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve(),
-  })
-);
-
 describe("fetcher", () => {
-  const fetchMock = fetch as unknown as jest.Mock;
-
   beforeEach(() => {
-    fetchMock.mockClear();
+    const fetchMock = jest.spyOn(window, "fetch");
+    (fetchMock as jest.Mock).mockResolvedValue({
+      status: 200,
+      json: async () => ({}),
+    });
   });
 
   it("should add api key to url", async () => {
@@ -19,8 +16,11 @@ describe("fetcher", () => {
       url: "http://test.com",
     });
 
-    expect(fetchMock.mock.calls[0][0].toString()).toBe(
-      `http://test.com/?key=${ApiConfigs.API_SECRET}`
+    expect(window.fetch).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        href: `http://test.com/?key=${ApiConfigs.API_SECRET}`,
+      })
     );
   });
 
@@ -33,8 +33,11 @@ describe("fetcher", () => {
       },
     });
 
-    expect(fetchMock.mock.calls[0][0].toString()).toBe(
-      `http://test.com/?a=123&b=456&key=${ApiConfigs.API_SECRET}`
+    expect(window.fetch).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        href: `http://test.com/?a=123&b=456&key=${ApiConfigs.API_SECRET}`,
+      })
     );
   });
 });
