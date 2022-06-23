@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Image, Link } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image } from "@chakra-ui/react";
 import React from "react";
 import { GameListResponse } from "../../types/GameListResponse";
 import { Card } from "../Card/Card";
@@ -8,7 +8,7 @@ type GameListProps = {
   items: GameListResponse[];
 };
 
-export const GameList = ({ items }: GameListProps) => {
+export const GameList: React.FC<GameListProps> = ({ items }: GameListProps) => {
   if (!items || items.length <= 0) {
     return <>No result.</>;
   }

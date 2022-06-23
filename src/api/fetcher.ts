@@ -11,5 +11,10 @@ export const fetcher = (cacheKey: ApiCacheKey) => {
 
   url.searchParams.set("key", ApiConfigs.API_SECRET);
 
-  return fetch(url).then((res) => res.json());
+  return fetch(url).then((res) => {
+    if (res.status !== 200) {
+      throw res; //TODO PGU: add a custom error object.
+    }
+    return res.json();
+  });
 };

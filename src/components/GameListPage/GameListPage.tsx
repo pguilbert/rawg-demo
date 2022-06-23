@@ -1,3 +1,4 @@
+import { Alert, AlertIcon } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 import { useApiGamesList } from "../../api/hooks/useApiGamesList";
 import { usePreviousDefinedValue } from "../../hooks/usePrevious";
@@ -5,7 +6,7 @@ import { LoadingOverlay } from "../LoadingOverlay/LoadingOverlay";
 import { SimplePagination } from "../Pagination/SimplePagination";
 import { GameList } from "./GameList";
 
-export const GameListPage = () => {
+export const GameListPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Parse current page param
@@ -27,7 +28,7 @@ export const GameListPage = () => {
   const goToNextPage = () => goToPage(currentPage + 1);
   const goToPreviousPage = () => goToPage(currentPage - 1);
 
-  const { data, isLoading } = useApiGamesList({
+  const { data, isLoading, error } = useApiGamesList({
     page: currentPage,
   });
 
@@ -38,6 +39,13 @@ export const GameListPage = () => {
 
   return (
     <div>
+      {error && (
+        <Alert status="error">
+          <AlertIcon />
+          Oops! Something went wrong.
+        </Alert>
+      )}
+
       {itemsToShow && <GameList items={itemsToShow} />}
 
       {data?.results && (

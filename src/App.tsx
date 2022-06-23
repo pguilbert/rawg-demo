@@ -1,7 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import "./App.css";
-import { GameDetails } from "./components/GameDetailsPage/GameDetails";
 import { MainLayout } from "./components/Layout/MainLayout";
 import { GameListPage } from "./components/GameListPage/GameListPage";
 import { SWRConfig } from "swr";

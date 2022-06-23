@@ -17,4 +17,5 @@ export type GameDetailsResponse = {
   reddit_description?: string;
   metacritic_url?: string;
   reddit_url?: string;
+  website?: string;
 };

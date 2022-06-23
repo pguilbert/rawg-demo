@@ -2,7 +2,6 @@ import {
   Heading,
   VStack,
   Image,
-  Text,
   UnorderedList,
   ListItem,
   Link,
@@ -14,14 +13,22 @@ type GameDetailsProps = {
   game: GameDetailsResponse;
 };
 
-export const GameDetails = ({ game }: GameDetailsProps) => {
+export const GameDetails: React.FC<GameDetailsProps> = ({
+  game,
+}: GameDetailsProps) => {
   return (
     <VStack w="full" alignItems="flex-start" spacing={4}>
       <Heading size="lg">{game.name}</Heading>
-      {game.reddit_description && <Text>{game.reddit_description}</Text>}
       <Box>
         Links:
         <UnorderedList>
+          {game.website && (
+            <ListItem>
+              <Link href={game.website} isExternal>
+                Website
+              </Link>
+            </ListItem>
+          )}
           {game.reddit_url && (
             <ListItem>
               <Link href={game.reddit_url} isExternal>
